@@ -8,10 +8,10 @@ Script using Nightmare.js to scrape items off Instagram.
 `npm i`
 
 ## Running
-`npm start`
-
+`node instaTest.js`
+<!--
 ## Testing
-`npm test`
+`npm test`-->
 <!--
 ## Configuring
 All configuration lies in `config.js`. These options can all be configured using environment variables. This app
