@@ -1,15 +1,22 @@
 {
-  "name": "nightmare",
+  "name": "nightmare_instagram_scraper",
   "version": "1.0.0",
-  "description": "",
-  "main": "instTest.js",
-  "dependencies": {
-    "nightmare": "^2.9.1"
-  },
-  "devDependencies": {},
+  "description": "Script using Nightmare.js to scrape items off Instagram.",
+  "main": "instaTest.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ecleptic/NightmareInstagramScraper.git"
+  },
   "author": "",
-  "license": "MIT"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ecleptic/NightmareInstagramScraper/issues"
+  },
+  "homepage": "https://github.com/Ecleptic/NightmareInstagramScraper#readme",
+  "dependencies": {
+    "nightmare": "^2.10.0"
+  }
 }
