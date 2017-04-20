@@ -1,0 +1,15 @@
+{
+  "name": "nightmare",
+  "version": "1.0.0",
+  "description": "",
+  "main": "instTest.js",
+  "dependencies": {
+    "nightmare": "^2.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
