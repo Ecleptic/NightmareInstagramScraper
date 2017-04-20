@@ -1,5 +1,5 @@
 const Nightmare = require('nightmare');
-const nightmare = Nightmare({show: true});
+const nightmare = Nightmare({show: true, openDevTools: true,});
 const fs = require('fs');
 const http = require('http');
 
