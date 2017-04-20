@@ -7,7 +7,7 @@ const nightmare = Nightmare({
 nightmare
   .goto('https://instagram.com/emarosa')
   .click('._icyx7')
-  .screenshot(`IMAGES/${variable}.png`)
+  .screenshot(`IMAGES/${'whoops'}.png`)
   // .wait('#zero_click_wrapper .c-info__title a')
   // .evaluate(function () {
   //   return document.querySelector('#zero_click_wrapper .c-info__title a').href;

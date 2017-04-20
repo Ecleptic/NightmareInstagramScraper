@@ -3,6 +3,7 @@ const useOldDownloadWay = false;
 const Nightmare = require('nightmare');
 const nightmare = Nightmare({show: true});
 
+
 nightmare
 	.goto('http://eprint.iacr.org/2004/152')
 	.evaluate(function ev(old){
