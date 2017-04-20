@@ -1,7 +1,7 @@
-var Nightmare = require('nightmare');
+const Nightmare = require('nightmare');
 const nightmare = Nightmare({show: true});
-var fs = require('fs');
-var http = require('http');
+const fs = require('fs');
+const http = require('http');
 
 nightmare
   .viewport(1000, 1000)

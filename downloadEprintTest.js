@@ -1,6 +1,6 @@
-var useOldDownloadWay = false;
+const useOldDownloadWay = false;
 
-var Nightmare = require('nightmare');
+const Nightmare = require('nightmare');
 const nightmare = Nightmare({show: true});
 
 nightmare
