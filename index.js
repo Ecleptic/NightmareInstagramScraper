@@ -1,73 +1,104 @@
 const Nightmare = require('nightmare')
 const nightmare = Nightmare({show: false, openDevTools: false});
+const config = require('./config')
+const URLs = config.URLs
+/** CAREFUL IT'S ASYNCRONYOUS */
 
-const URLs = ['emarosa', 'ucla']
-let number
+/**
+ * This Script will recursively iterate through public
+ * instagram pages and screenshot each set of images per page.
+ */
 
-for (urlNumber in URLs) {
-    // let urlNumber = 0
-    // console.log("urlNumber = " + urlNumber)
-    // console.log(`New URL is: https://www.instagram.com/${URLs[urlNumber]}`)
-    setup()
-    function setup() {
-        number = 0
-        firstStep(`https://www.instagram.com/${URLs[urlNumber]}`)
-    }
+let urlNumber = 0
 
-    function firstStep(address) {
-        // console.log("beginning first Step, number is: " + number)
-        // console.log("Address is: " + address)
+setup(urlNumber)
+
+/**
+   * Sets up the Nightmare Instance, catches if we are finished
+   * @param {int} urlNumber The number of which url we are navigating to.
+   */
+
+function setup(urlNumber) {
+    if (urlNumber > URLs.length - 1) {
         nightmare
-            .goto(address)
-            .wait('._bkw5z')
-            .wait('._ovg3g')
-        getLength()
-
-    }
-    function getLength() {
-        // console.log("getLength")
-        nightmare.evaluate(function () {
-            return document
-                .querySelector('._bkw5z')
-                .innerText;
-        })
-        // .end()
-            .then(function (lengthNumber) {
-                number = lengthNumber
-                // console.log("number inside getLength.then is: " + number)
-                nightmare
-                    .wait(300)
-                    .click('._8mlbc') // try this
-                    // .click('._ovg3g')    // or this
-                    .wait('._a012k')
-                    .catch(function (error) {
-                        console.error('Search failed inside getLength: ', error);
-                    });
-                nextImageScreenshot()
+            .end()
+            .then(() => {
+                // console.log("Script Ending")
             })
-
+        return
     }
+    navigateToAddress(`https://www.instagram.com/${URLs[urlNumber]}/`)
+}
 
-    function nextImageScreenshot() {
-        // nightmare.viewport(1200, 550); nightmare.viewport(1920, 1080);
-        nightmare.viewport(3840, 2160)
-        let keepGoing = true
-        let imageNumber = 0
-        while (keepGoing) {
-            nightmare.screenshot(`IMAGES/${URLs[urlNumber]}_Screenshot_${imageNumber}.png`)
-                .wait('.coreSpriteRightPaginationArrow')
-                .click('.coreSpriteRightPaginationArrow')
-                .wait('._a012k')
-            imageNumber++;
-            if (imageNumber >= number) {
-                nightmare
-                    .end()
-                    .catch(function (error) {
-                        console.error('Search failed inside nextImageScreenshot: ', error);
-                    });
-                console.log("nightmare.End")
-                keepGoing = false
-            }
-        }
+/**
+ * navigates the page to the current URL
+ * @param {string} address The url of the current page
+ */
+function navigateToAddress(address) {
+    nightmare
+        .goto(address)
+        .wait('._bkw5z')
+        .wait('._ovg3g')
+        .exists('._8yoiv')
+        /* 
+            * This piece is supposed to get rid of the popup at the bottom, but doesn't work quite yet.
+
+        .then((elementExists) => {
+             nightmare.click('._8yoiv').catch((error) => {console.error( error)});
+             return elementExists
+         })
+         */
+        .then(() => {
+            getLength()
+        })
+        .catch((error) => {
+            console.error('Search failed inside navigateToAddress: ', error);
+        });
+}
+/**
+ * scrapes for the number of images in the page
+ * @returns {int} length of album
+ */
+function getLength() {
+    nightmare.evaluate(() => {
+        return document
+            .querySelector('._bkw5z')
+            .innerText;
+    }).then((lengthNumber) => {
+        nightmare
+            .wait(300)
+            .click('._8mlbc') // try this
+            .wait('._a012k')
+            .catch((error) => {
+                console.error('Search failed inside getLength: ', error);
+            });
+        nextImageScreenshot(0, lengthNumber)
+    })
+}
+/**
+ * recursively screenshots the page and then clicks to the next image
+ * @param {int} counter Which image is getting screenshot
+ * @param {int} length from getLength() The number of images in an album
+ */
+
+function nextImageScreenshot(counter, length) {
+    nightmare.viewport(1920, 1080)
+    console.log(`Counter: ${counter}, Length: ${length}`)
+    if (counter > length) {
+        console.log("Ending this round")
+        nightmare.then(() => {
+            setup(++urlNumber)
+        })
+        return
     }
+    nightmare.screenshot(`IMAGES/${URLs[urlNumber]}_Screenshot_${counter}.png`)
+        .wait('.coreSpriteRightPaginationArrow')
+        .click('.coreSpriteRightPaginationArrow')
+        .wait('._a012k')
+        .then(() => {
+            nextImageScreenshot(++counter, length)
+        })
+        .catch((error) => {
+            console.error('Search failed inside nextImageScreenshot: ', error);
+        });
 }
