@@ -6,8 +6,8 @@ let number
 
 for (urlNumber in URLs) {
     // let urlNumber = 0
-    console.log("urlNumber = " + urlNumber)
-    console.log(`New URL is: https://www.instagram.com/${URLs[urlNumber]}`)
+    // console.log("urlNumber = " + urlNumber)
+    // console.log(`New URL is: https://www.instagram.com/${URLs[urlNumber]}`)
     setup()
     function setup() {
         number = 0
@@ -15,8 +15,8 @@ for (urlNumber in URLs) {
     }
 
     function firstStep(address) {
-        console.log("beginning first Step, number is: " + number)
-        console.log("Address is: " + address)
+        // console.log("beginning first Step, number is: " + number)
+        // console.log("Address is: " + address)
         nightmare
             .goto(address)
             .wait('._bkw5z')
@@ -25,7 +25,7 @@ for (urlNumber in URLs) {
 
     }
     function getLength() {
-        console.log("getLength")
+        // console.log("getLength")
         nightmare.evaluate(function () {
             return document
                 .querySelector('._bkw5z')
@@ -34,7 +34,7 @@ for (urlNumber in URLs) {
         // .end()
             .then(function (lengthNumber) {
                 number = lengthNumber
-                console.log("number inside getLength.then is: " + number)
+                // console.log("number inside getLength.then is: " + number)
                 nightmare
                     .wait(300)
                     .click('._8mlbc') // try this
