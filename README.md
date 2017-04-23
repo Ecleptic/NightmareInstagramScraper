@@ -8,7 +8,7 @@ Script using Nightmare.js to scrape items off Instagram.
 `npm i`
 
 ## Running
-`node instaTest.js`
+`npm start`
 <!--
 ## Testing
 `npm test`-->
