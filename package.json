@@ -19,7 +19,6 @@
   "homepage": "https://github.com/Ecleptic/NightmareInstagramScraper#readme",
   "dependencies": {
     "mkdirp": "^0.5.1",
-    "nightmare": "^2.10.0",
-    "nightmare-inline-download": "^0.2.2"
+    "nightmare": "^2.10.0"
   }
 }

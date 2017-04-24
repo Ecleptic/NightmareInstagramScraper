@@ -4,6 +4,9 @@ const config = require('./config')
 const mkdirp = require('mkdirp');
 
 const URLs = config.URLs
+
+let urlNumber = 0
+
 /** CAREFUL IT'S ASYNCRONYOUS */
 
 /**
@@ -11,8 +14,9 @@ const URLs = config.URLs
  * instagram pages and screenshot each set of images per page.
  */
 
-let urlNumber = 0
-
+/**
+ * Program begins here
+ */
 setup(urlNumber)
 
 /**
@@ -38,6 +42,7 @@ function setup(urlNumber) {
  * @param {string} address The url of the current page
  */
 function navigateToAddress(address) {
+    console.log(`Scraping: ${address}`)
     nightmare
         .goto(address)
         .wait('._bkw5z')
@@ -99,7 +104,7 @@ function nextImageScreenshot(counter, length) {
         })
         return
     }
-    nightmare.screenshot(`IMAGES/${URLs[urlNumber].toUpperCase()}/Screenshot_${counter}.png`)
+    nightmare.screenshot(`IMAGES/${URLs[urlNumber].toUpperCase()}/${URLs[urlNumber].toUpperCase()}_Screenshot_${counter}.png`)
         .wait('.coreSpriteRightPaginationArrow')
         .click('.coreSpriteRightPaginationArrow')
         .wait('._a012k')
