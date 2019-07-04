@@ -5,7 +5,9 @@
   "main": "instaTest.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,8 @@
   "homepage": "https://github.com/Ecleptic/NightmareInstagramScraper#readme",
   "dependencies": {
     "mkdirp": "^0.5.1",
-    "nightmare": "^2.10.0"
-  }
+    "nightmare": "^2.10.0",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
